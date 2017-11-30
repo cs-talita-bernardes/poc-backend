@@ -17,6 +17,12 @@ pipeline {
             }
          }
         
+        stage ("Nexus Publish"){
+            steps{ 
+                sh 'curl --upload-file ${WORKSPACE}/build/libs/*.jar -u ${user}:${pass} -v http://nexus.csteam.tk/nexus/content/repositories/releases/artefact-${BUILD_NUMBER}'
+            }     
+        }
+        
         
         
         stage('Send Message') {
