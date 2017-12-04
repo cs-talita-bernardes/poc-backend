@@ -18,9 +18,11 @@ pipeline {
          }
         
         stage ("Nexus Publish"){
-             withCredentials([usernamePassword(credentialsId: '123', passwordVariable: 'NX_PASS', usernameVariable: 'NX_USER')]) {
+            steps{
+                withCredentials([usernamePassword(credentialsId: '7d13ef7c-195a-44f2-bd62-95ba137ffcc2', passwordVariable: 'NX_PASS', usernameVariable: 'NX_USER')]) {
                     sh "curl --upload-file ${WORKSPACE}/build/libs/*.jar -u $NX_USER:$NX_PASS -v http://nexus.csteam.tk/nexus/content/repositories/releases/artefact-${BUILD_NUMBER}.jar"
-             }     
+                }
+            }
         }
         
         
